@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#f4f3ed" />
+		<title>SecondServe | Surplus Food. Fast and efficient distribution</title>
+		<script>
+			(() => {
+				const repoBase = "/Second-Serve-BBS";
+				const path = window.location.pathname || "/";
+				const hash = window.location.hash || "";
+				if (hash.startsWith("#/")) return;
+				if (path === "/" || path === repoBase + "/" || path === repoBase) return;
+				const route = path.startsWith(repoBase)
+					? path.slice(repoBase.length) || "/"
+					: path;
+				const next = repoBase + "/#/" + (route === "/" ? "" : route.replace(/^\/+/, ""));
+				try {
+					history.replaceState(null, "", next);
+				} catch (error) {
+					window.location.hash = next.includes("#") ? next.slice(next.indexOf("#")) : "#";
+				}
+			})();
+		</script>
+		<script type="module" src="./src/main.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>

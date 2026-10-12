@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting…</title>
+    <script>
+      (() => {
+        const repoBase = "/Second-Serve-BBS";
+        const url = new URL(window.location.href);
+        const requested = url.pathname || "/";
+        const search = url.search || "";
+        const path = requested.startsWith(repoBase)
+          ? requested.slice(repoBase.length) || "/"
+          : requested;
+        const cleaned = path === "/" ? "" : path.replace(/^\/+/, "");
+        const target = repoBase + "/#/" + cleaned + search;
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
